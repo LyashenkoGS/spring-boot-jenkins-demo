@@ -1,2 +1,9 @@
 # spring-boot-jenkins-demo
-An example for spring-boot jenkins workshop
+A Hello-world spring-boot based application for a jenkins workshop.
+
+## Prerequisites
+* java 1.8
+* maven
+##Deployment
+
+
