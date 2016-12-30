@@ -13,7 +13,7 @@ public class SpringBootJenkinsWorkshopApplication {
 
 	@RequestMapping("/")
 	String home() {
-		return "Hello World!";
+		return "Siski!";
 	}
 
 	public static void main(String[] args) {
