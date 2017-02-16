@@ -1,18 +1,21 @@
-# spring-boot-jenkins-demo
-A Hello-world spring-boot based application for a jenkins workshop.
+# Spring-boot-jenkins-demo
+
+A Hello-world spring-boot based application for a Jenkins CI workshop.
 
 ## Prerequisites
-* Java 1.8
-* Maven
+
+* Docker 
+
 ##Deployment
 
 ####Locally
+
 * execute: 
 
-        mvn clean install
-        docker build .
-        docker run -it <builded_container_id> -p 8080:8080
-Application will be available on localhost:8080
+        docker build -t lyashenkogs/spring-boot-jenkins-demo:0.0.3 .
+        docker run  -p 8081:8080 lyashenkogs/spring-boot-jenkins-demo:0.0.3
+        
+Application will be available on localhost:8081
         
 ####Setup Jenkins
 
@@ -20,19 +23,16 @@ Application will be available on localhost:8080
 
 * add github URL 
 * select checkbox Build when a change is pushed to GitHub
-* add a build step -> execute shell -> 
-        
-        mvn clean install
 
 * add a build step -> execute shell -> 
         
-        docker build -t lyashenkogs/spring-boot-jenkins-demo:0.0.2 .
+        docker build -t lyashenkogs/spring-boot-jenkins-demo:0.0.3 .
 * add a build step -> execute shell -> 
         
        docker stop $(docker ps -aq)
 * add a build step -> execute shell -> 
                
-        docker run -d -p 8081:8080 lyashenkogs/spring-boot-jenkins-demo:0.0.2
+        docker run -d -p 8081:8080 lyashenkogs/spring-boot-jenkins-demo:0.0.3
               
 2. Setup a webhook from github
 github page -> settings -> Integration & services -> add service -> Jenkins(GitHub plugin) 

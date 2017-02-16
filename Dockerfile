@@ -1,4 +1,8 @@
 FROM frolvlad/alpine-oraclejdk8:slim
-ADD ./target/spring-boot-jenkins-workshop-0.0.2.jar app.jar
+ADD .mvn .mvn
+ADD src src
+ADD mvnw mvnw
+ADD pom.xml pom.xml
+RUN sh -c './mvnw clean install'
 ENV JAVA_OPTS=""
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS  -jar /app.jar" ]
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -jar ./target/spring-boot-jenkins-workshop-0.0.3.jar " ]
