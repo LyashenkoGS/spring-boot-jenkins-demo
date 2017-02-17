@@ -4,7 +4,7 @@ A Hello-world spring-boot based application for a Jenkins CI workshop.
 
 ## Prerequisites
 
-* Docker 
+* Docker version 1.13.0 or higher
 
 ##Deployment
 
@@ -40,4 +40,9 @@ http://<your-domain-name>/web-hook/
 3. click test a service and check if it triggered the jenkins job
 Application should be available on 
 http://<your-domain-name>:8080
+
+##Performance testing
+
+Simple [Gatling](http://gatling.io/#/) script emulating 30_000 users load to localhost:8080
+[script](./performance-testing/RecordedSimulation.scala)
 
