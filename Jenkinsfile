@@ -1,9 +1,16 @@
+#!/usr/bin/env groovy
+
 pipeline {
     agent any
     stages {
         stage('Build') {
-            steps {
-               echo 'This is a minimal pipeline.'
+           steps {
+                sh 'mvn clean install'
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml'
+                }
             }
         }
     }
