@@ -43,6 +43,43 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <registry>docker.artifactory</registry>
+                    <verbose>true</verbose>
+                    <images>
+                        <image>
+                            <!-- Replace your-project-name -->
+                            <name>lyashenkogs/${project.artifactId}:${project.version}</name>
+                            <build>
+                                <!-- This is the same FROM used in a Dockerfile -->
+                                <from>vixns/java8</from>
+                                <!-- This is the same ENTRYPOINT used in a Dockerfile -->
+                                <ports>
+                                    <port>8080</port>
+                                </ports>
+                                <entryPoint>
+                                    <exec>
+                                        <arg>java</arg>
+                                        <!-- This extra argument is so Tomcat can start faster due to lack of entropy -->
+                                        <arg>-Djava.security.egd=file:/dev/./urandom</arg>
+                                        <arg>-jar</arg>
+                                        <!-- /maven/ is the default dir that the plugin copies your artifact to -->
+                                        <arg>/maven/${project.artifactId}-${project.version}.${project.packaging}</arg>
+                                    </exec>
+                                </entryPoint>
+
+                                <assembly>
+                                    <!-- This is a predefined assembly.xml that will only copy your final artifact to the Docker image -->
+                                    <descriptorRef>artifact</descriptorRef>
+                                </assembly>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
