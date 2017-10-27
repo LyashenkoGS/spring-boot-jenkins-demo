@@ -1,8 +1,9 @@
 FROM frolvlad/alpine-oraclejdk8:slim
-ADD ../../.mvn .mvn
-ADD ../../src src
-ADD ../../mvnw mvnw
-ADD ../../pom.xml pom.xml
+#Copy all the files to a docker container to perform a build inside it
+ADD .mvn .mvn
+ADD src src
+ADD mvnw mvnw
+ADD pom.xml pom.xml
 RUN sh -c './mvnw clean install'
 EXPOSE 8080
 ENV JAVA_OPTS=""

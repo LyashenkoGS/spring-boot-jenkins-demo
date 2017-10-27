@@ -17,6 +17,6 @@ public class SpringBootJenkinsWorkshopApplication {
     @RequestMapping("/")
     String home() {
         System.out.println("the index page accessed: " + counter + " times!");
-        return "Siski! " + counter++;
+        return "Hello! " + counter++;
     }
 }

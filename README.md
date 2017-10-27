@@ -5,19 +5,20 @@ A Hello-world spring-boot based application for a Jenkins CI workshop.
 ## Prerequisites
 
 * Docker version 1.13.0 or higher
+* JDK 1.8
 
-##Deployment
+## Deployment
 
-####Locally
+#### Locally
 
 * execute: 
 
-        docker build -t lyashenkogs/spring-boot-jenkins-demo:0.0.3 .
-        docker run  -p 8081:8080 lyashenkogs/spring-boot-jenkins-demo:0.0.3
+        docker build -t lyashenkogs/spring-boot-jenkins-workshop:0.0.3 .
+        docker run  -p 8081:8080 lyashenkogs/spring-boot-jenkins-workshop:0.0.3
         
 Application will be available on localhost:8081
         
-####Setup Jenkins
+#### Setup Jenkins
 
 1. Create a new freestyle job
 
@@ -37,11 +38,12 @@ Application will be available on localhost:8081
 2. Setup a webhook from github
 github page -> settings -> Integration & services -> add service -> Jenkins(GitHub plugin) 
 http://<your-domain-name>/web-hook/
+
 3. click test a service and check if it triggered the jenkins job
 Application should be available on 
 http://<your-domain-name>:8080
 
-##Performance testing
+## Performance testing
 
 Simple [Gatling](http://gatling.io/#/) script emulating 30_000 users load to localhost:8080
 [script](./performance-testing/RecordedSimulation.scala)

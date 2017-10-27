@@ -9,7 +9,7 @@
     <packaging>jar</packaging>
 
     <name>spring-boot-jenkins-workshop</name>
-    <description>sprin-boot-jenkins-workshop</description>
+    <description>spring-boot-jenkins-workshop</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -29,7 +29,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -38,6 +37,7 @@
     </dependencies>
 
     <build>
+        <!-- Generate code coverage reports-->
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -62,20 +62,20 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!--Dockerize the application -->
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
+                <version>0.22.1</version>
                 <configuration>
+                    <!--Specify a private docker registry name. Comment this out if need-->
                     <registry>docker.artifactory</registry>
                     <verbose>true</verbose>
                     <images>
                         <image>
-                            <!-- Replace your-project-name -->
                             <name>lyashenkogs/${project.artifactId}:${project.version}</name>
                             <build>
-                                <!-- This is the same FROM used in a Dockerfile -->
-                                <from>vixns/java8</from>
-                                <!-- This is the same ENTRYPOINT used in a Dockerfile -->
+                                <from>frolvlad/alpine-oraclejdk8:slim</from>
                                 <ports>
                                     <port>8080</port>
                                 </ports>
@@ -89,7 +89,6 @@
                                         <arg>/maven/${project.artifactId}-${project.version}.${project.packaging}</arg>
                                     </exec>
                                 </entryPoint>
-
                                 <assembly>
                                     <!-- This is a predefined assembly.xml that will only copy your final artifact to the Docker image -->
                                     <descriptorRef>artifact</descriptorRef>
@@ -102,7 +101,7 @@
         </plugins>
     </build>
 
-
+    <!--Specify an Artifactory instance -->
     <distributionManagement>
         <repository>
             <id>central</id>
