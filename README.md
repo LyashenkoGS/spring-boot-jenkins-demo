@@ -48,3 +48,4 @@ http://<your-domain-name>:8080
 Simple [Gatling](http://gatling.io/#/) script emulating 30_000 users load to localhost:8080
 [script](./performance-testing/RecordedSimulation.scala)
 
+## Trigger Jenkins build on pull requests
