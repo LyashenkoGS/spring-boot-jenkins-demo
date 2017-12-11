@@ -16,6 +16,7 @@ public class SpringBootJenkinsWorkshopApplicationTests {
 		//explicitly broken test
 		Assert.assertEquals(1, 0);
 		//aa
+		//bb
 	}
 
 
