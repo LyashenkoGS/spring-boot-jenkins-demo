@@ -14,6 +14,7 @@ public class SpringBootJenkinsWorkshopApplicationTests {
     public void contextLoads() {
 	//	Assert.assertEquals(0,1);
 		//azaza
+		//aaaa
     }
 
 }
